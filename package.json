@@ -1,6 +1,6 @@
 {
   "name": "hubl",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Implementation of HubL using Nunjucks",
   "main": "index.js",
   "scripts": {
