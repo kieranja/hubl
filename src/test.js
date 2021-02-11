@@ -4,7 +4,7 @@ const nunjucks = require('nunjucks');
 const hubl = require('./');
 
 // Autoescape disabled - this is fine as we're not using this in prod.
-const env = new nunjucks.Environment();
+const env = new nunjucks.Environment(new nunjucks.FileSystemLoader('./'));
 
 hubl.configure(nunjucks, env, {
 
@@ -31,4 +31,22 @@ const output3 = env.renderString(
   sshshsh`, 
   { username: 'James' }
 );
-console.log(output3);
+
+
+const output4 = env.renderString(
+  `Hello 
+  {% dnd_area "cool", className="hey" %}
+    heydsfdsdsfdsfdsfdsffsffdfsfdsfdsdsfd
+  {% end_dnd_area %}
+  sshshsh`, 
+  { username: 'James' }
+);
+
+const module2 = env.renderString(
+  `Hello 
+  {% dnd_module path="module.html", offset=2 %}
+
+  sshshsh`, 
+  { username: 'James' }
+);
+console.log(module2);

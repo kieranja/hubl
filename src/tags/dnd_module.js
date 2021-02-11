@@ -10,17 +10,26 @@ function handler(env) {
 
       var args = parser.parseSignature(null, true);
       parser.advanceAfterBlockEnd(tok.value);
-      //var body = parser.parseUntilBlocks('end_dnd_module');
-      let body = null;
-      //parser.advanceAfterBlockEnd();
-      return new nodes.CallExtension(this, 'run', args, [body]);
+      // var body = parser.parseUntilBlocks('end_dnd_module');
+      // parser.advanceAfterBlockEnd();
+      return new nodes.CallExtension(this, 'run', args, [null]);
 
   };
 
-  this.run = function(environment) {
-    console.log(environment);
-      let str = JSON.stringify(environment.ctx);
-      return new Nunjucks.runtime.SafeString(str);
+  this.run = function(context, args) {
+
+    const { path, width = 12, offset=0 } = args;
+
+    const content = env.render(path);
+    return new Nunjucks.runtime.SafeString(`
+    <div class="span${width} widget-span widget-type-custom_widget" style="" data-widget-type="custom_widget" data-x="${ offset }" data-w="${ width }">
+      <div id="hs_cos_wrapper_main-module-1" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module" >
+          <span id="hs_cos_wrapper_module-1_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text">
+              ${content}
+          </span>
+      </div>
+    </div>  
+    `);
   }
 }
 

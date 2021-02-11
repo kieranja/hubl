@@ -8,17 +8,17 @@ module.exports.configure = function(Nunjucks, env, config) {
   // Load tags
   glob.sync( './filters/*.js' ).forEach( function( file ) {
     const req = require( path.resolve( file ) );
-    req.register(env);
+    req.register(env, config);
   });
 
   glob.sync( './functions/*.js' ).forEach( function( file ) {
     const req = require( path.resolve( file ) );
-    req.register(env);
+    req.register(env, config);
   });
 
   glob.sync( './tags/*.js' ).forEach( function( file ) {
     const req = require( path.resolve( file ) );
-    req.register(env);
+    req.register(env, config);
   });
 
 
