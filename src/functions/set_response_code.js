@@ -4,12 +4,13 @@ function register(env) {
     
 function handler(code) {
 
+  // Doesn't need to do anything.
 
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

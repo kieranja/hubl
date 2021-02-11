@@ -8,8 +8,8 @@ function handler(file_id) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

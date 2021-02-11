@@ -8,8 +8,8 @@ function handler(object_type, property_name) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

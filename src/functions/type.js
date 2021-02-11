@@ -2,14 +2,20 @@ function register(env) {
   env.addGlobal("type", handler);
 }
     
-function handler() {
+function handler(input) {
 
-
+  let types = {
+    'string' : 'str',
+    'boolean': 'bool',
+    'array': 'array',
+    'number': 'int',
+  }
+  return types[typeof input];
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

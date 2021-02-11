@@ -8,8 +8,8 @@ function handler(point1, point2_lat, point2_long, units) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

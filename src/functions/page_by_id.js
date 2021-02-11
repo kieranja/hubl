@@ -8,8 +8,8 @@ function handler(page_id) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

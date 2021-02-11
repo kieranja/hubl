@@ -3,13 +3,12 @@ function register(env) {
 }
     
 function handler(url, width, height, length, upscale, upsize) {
-
-
+  return `${ url }?length=${ length }&name=img.jpg`;
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

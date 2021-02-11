@@ -8,8 +8,8 @@ function handler(selected_blog, limit) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

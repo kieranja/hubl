@@ -8,8 +8,8 @@ function handler(blog_post_id) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

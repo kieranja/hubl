@@ -8,8 +8,8 @@ function handler(object_type, query_or_object_instance_id, properties, formattin
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

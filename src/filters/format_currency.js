@@ -8,7 +8,7 @@ function handler(input, locale, currency_code, use_default_decimal_digits) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

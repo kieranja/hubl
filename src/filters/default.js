@@ -15,7 +15,7 @@ function handler(input, default_value, truthy) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

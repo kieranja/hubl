@@ -3,13 +3,12 @@ function register(env) {
 }
     
 function handler(expression, default_attr) {
-
-
+  return default_attr;
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

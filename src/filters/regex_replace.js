@@ -8,7 +8,7 @@ function handler(input, regex, new_attr) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

@@ -8,8 +8,8 @@ function handler(start, end, step) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

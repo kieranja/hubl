@@ -8,8 +8,8 @@ function handler(id, association_category, association_definition_id, query, pro
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

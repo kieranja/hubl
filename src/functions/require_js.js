@@ -1,15 +1,21 @@
-function register(env) {
-  env.addGlobal("require_js", handler);
-}
-    
-function handler(url, render_options) {
+import Nunjucks from 'nunjucks';
 
+function register(env) {
+  env.addGlobal("require_js", (url, render_options) => handler(env, url, render_options));
+}
+
+
+function handler(env, url, render_options) {
+  const existing = env.getGlobal("standard_footer_includes");
+  env.addGlobal(
+    "standard_footer_includes", 
+    new Nunjucks.runtime.SafeString(existing + `\n<script src="${ url }"></script>`)
+  );
 
 }
   
-    
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

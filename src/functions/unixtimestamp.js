@@ -3,13 +3,12 @@ function register(env) {
 }
     
 function handler(var_attr) {
-
-
+  return new Date().getTime() / 1000;
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

@@ -4,11 +4,10 @@ function register(env) {
 
 function handler(input) {
 
-
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

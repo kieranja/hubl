@@ -8,7 +8,7 @@ function handler(input, width, break_long_words) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

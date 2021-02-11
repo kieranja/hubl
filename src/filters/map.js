@@ -7,7 +7,7 @@ function handler(input, attribute, add, env) {
   return input.map(fn);
 }
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

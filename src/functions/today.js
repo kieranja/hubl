@@ -8,8 +8,8 @@ function handler(timezone) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

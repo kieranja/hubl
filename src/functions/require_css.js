@@ -8,8 +8,8 @@ function handler(url, render_options) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

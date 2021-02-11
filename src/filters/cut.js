@@ -7,7 +7,7 @@ function handler(input, to_remove) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

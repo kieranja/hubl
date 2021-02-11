@@ -8,8 +8,8 @@ function handler(path) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

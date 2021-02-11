@@ -8,8 +8,8 @@ function handler(message_name, substitutions) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

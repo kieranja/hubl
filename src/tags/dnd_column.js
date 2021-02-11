@@ -1,7 +1,7 @@
 function register(env) {
   env.addExtension("dnd_column", new handler(env));
 }
-const Nunjucks = require('nunjucks');
+import Nunjucks from 'nunjucks';
 function handler(env) {
   this.tags = ['dnd_column'];
 
@@ -26,9 +26,9 @@ function handler(env) {
   }
 }
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 }
   
 

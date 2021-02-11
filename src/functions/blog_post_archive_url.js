@@ -8,8 +8,8 @@ function handler(selected_blog, year, month, day) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

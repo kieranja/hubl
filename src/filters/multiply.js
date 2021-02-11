@@ -7,7 +7,7 @@ function handler(input, multiplier) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

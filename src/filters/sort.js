@@ -8,7 +8,7 @@ function handler(input, reverse, case_sensitive, attribute) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

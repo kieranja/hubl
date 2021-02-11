@@ -5,7 +5,7 @@ let str = `
 
 `;
 
-const location = "./src/filters/";
+const location = "./src/tags/";
 
 let invoke_str = ``;
 glob.sync( path.join(__dirname, location, '*.js') ).forEach( function( file ) {
@@ -16,11 +16,11 @@ glob.sync( path.join(__dirname, location, '*.js') ).forEach( function( file ) {
   // const req = require( path.resolve( file ) );
 
 
-str += `import ${filename}_filter from './${filename}.js';
+str += `import ${filename}_init from './${filename}.js';
 `;
 
   invoke_str+= `
-  ${filename}_filter.register(env, config);`;
+  ${filename}_init(env, config);`;
 
 });
 

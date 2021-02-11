@@ -8,8 +8,8 @@ function handler(date) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

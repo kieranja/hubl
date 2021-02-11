@@ -3,13 +3,12 @@ function register(env) {
 }
     
 function handler(language_code, target_language_code) {
-
-
+  return 'English';
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

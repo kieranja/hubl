@@ -3,13 +3,12 @@ function register(env) {
 }
     
 function handler(name) {
-
-
+  return `https://cdn2.hubspot.net/hubfs/6178146/${ name }`;
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

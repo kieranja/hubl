@@ -3,13 +3,12 @@ function register(env) {
 }
     
 function handler(path) {
-
-
+  return path;
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

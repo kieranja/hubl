@@ -1,7 +1,7 @@
 function register(env) {
   env.addExtension("global_module", new handler(env));
 }
-const Nunjucks = require('nunjucks');
+import Nunjucks from 'nunjucks';
 function handler(env) {
   this.tags = ['global_module'];
 
@@ -24,9 +24,9 @@ function handler(env) {
   }
 }
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 }
   
 

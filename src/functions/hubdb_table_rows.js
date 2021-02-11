@@ -8,8 +8,8 @@ function handler(table_id, query) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

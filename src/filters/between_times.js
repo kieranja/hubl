@@ -8,7 +8,7 @@ function handler(input, end, unit) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

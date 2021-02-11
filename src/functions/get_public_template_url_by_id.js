@@ -8,8 +8,8 @@ function handler(template_id) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

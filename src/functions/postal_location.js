@@ -3,13 +3,15 @@ function register(env) {
 }
     
 function handler(postal_code, country_code) {
-
-
+  return {
+    latitude: 42.3647,
+    longitude: -71.1042
+  }
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   

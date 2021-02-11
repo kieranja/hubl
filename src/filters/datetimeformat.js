@@ -8,7 +8,7 @@ function handler(input, format, timezone, locale) {
 }
   
 
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };

@@ -8,8 +8,8 @@ function handler(base_color, brightness_offset) {
 }
   
     
-module.exports = {
+export {
   handler,
-  register
+  register as default
 };
   
