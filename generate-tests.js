@@ -19,7 +19,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
   let obj = await getJSON(docPath);
   const { filters, functions, tags } = obj;
 
-  await buildTests(filters, 'filters');
+  await buildTests(tags, 'tags');
 
 })().catch( res => {
   console.log('Error occured', res);
