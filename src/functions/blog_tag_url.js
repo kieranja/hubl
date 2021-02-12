@@ -4,7 +4,7 @@ function register(env) {
     
 function handler(selected_blog, tag_slug) {
 
-
+  return `http://blog.hubspot.com/marketing/tag/inbound-marketing`;
 }
   
     

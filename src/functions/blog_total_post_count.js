@@ -3,8 +3,7 @@ function register(env) {
 }
     
 function handler(selected_blog) {
-
-
+  return 2;
 }
   
     

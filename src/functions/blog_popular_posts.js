@@ -4,6 +4,9 @@ function register(env) {
     
 function handler(selected_blog, limit, tag_slug, time_frame) {
 
+  return [{
+    name: 'Title 1'
+  }, {name: 'Title 2'}]
 
 }
   

@@ -4,6 +4,9 @@ function register(env) {
     
 function handler(selected_blog, author_slug, limit) {
 
+  return [{
+    title: 'Title 1'
+  }]
 
 }
   

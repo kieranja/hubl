@@ -3,8 +3,7 @@ function register(env) {
 }
     
 function handler(selected_blog, topic_slug, limit) {
-
-
+  return [{title: 'title 1'}]
 }
   
     

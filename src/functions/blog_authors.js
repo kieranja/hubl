@@ -3,8 +3,7 @@ function register(env) {
 }
     
 function handler(selected_blog, limit) {
-
-
+    return ['Author 1', 'Author 2', 'Author 3'];
 }
   
     

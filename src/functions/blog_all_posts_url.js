@@ -3,8 +3,7 @@ function register(env) {
 }
     
 function handler(selected_blog) {
-
-
+  return `<a href="http://www.hubspot.com/marketing/all">All Marketing blog posts</a>`;
 }
   
     

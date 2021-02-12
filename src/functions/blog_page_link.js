@@ -3,8 +3,7 @@ function register(env) {
 }
     
 function handler(page) {
-
-
+  return `http://designers.hubspot.com/blog/page/${page}`;
 }
   
     

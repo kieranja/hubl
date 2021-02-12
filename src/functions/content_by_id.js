@@ -3,7 +3,9 @@ function register(env) {
 }
     
 function handler(id) {
-
+  return {
+    title: 'Content title'
+  }
 
 }
   

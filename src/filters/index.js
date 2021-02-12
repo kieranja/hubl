@@ -1,5 +1,3 @@
-
-
 import add_init from './add.js';
 import attr_init from './attr.js';
 import between_times_init from './between_times.js';

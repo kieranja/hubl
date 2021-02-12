@@ -4,7 +4,7 @@ function register(env) {
     
 function handler(selected_blog, limit) {
 
-
+  return [{ slug: 'slugfortag', title: 'tag titel'}]
 }
   
     

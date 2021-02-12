@@ -4,7 +4,9 @@ function register(env) {
     
 function handler(selected_blog, tag_slug, limit) {
 
-
+  return [{
+    title: 'Post 1'
+  }]
 }
   
     

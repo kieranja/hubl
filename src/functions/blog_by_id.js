@@ -3,8 +3,10 @@ function register(env) {
 }
     
 function handler(id) {
-
-
+  return {
+    absolute_url: 'http://blog.com',
+    html_title: 'This is a blog title'
+  }
 }
   
     

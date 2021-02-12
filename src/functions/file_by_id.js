@@ -4,7 +4,7 @@ function register(env) {
     
 function handler(file_id) {
 
-
+  return {};
 }
   
     

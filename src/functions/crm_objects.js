@@ -4,7 +4,7 @@ function register(env) {
     
 function handler(object_type, query_or_list_of_object_ids, properties, formatting) {
 
-
+  return ["not implemented yet"];
 }
   
     

@@ -4,7 +4,9 @@ function register(env) {
     
 function handler(ids) {
 
-
+  return [
+    {title: 'page title'}
+  ]
 }
   
     

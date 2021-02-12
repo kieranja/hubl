@@ -4,7 +4,7 @@ function register(env) {
     
 function handler(selected_blog, year, month, day) {
 
-
+  return `http://blog.hubspot.com/marketing/archive/${year}/${ month }/${ day }`;
 }
   
     

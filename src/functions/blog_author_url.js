@@ -3,8 +3,7 @@ function register(env) {
 }
     
 function handler(selected_blog, author_slug) {
-
-
+  return `<a href="http://blog.hubspot.com/marketing/author/brian-halligan">Brian Halligan</a>`;
 }
   
     

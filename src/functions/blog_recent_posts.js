@@ -4,7 +4,9 @@ function register(env) {
     
 function handler(selected_blog, limit) {
 
-
+  return [{
+    title: 'title 1'
+  }]
 }
   
     

@@ -3,8 +3,7 @@ function register(env) {
 }
     
 function handler(object_type, query_or_object_instance_id, properties, formatting) {
-
-
+  return 'crm_object not implemented yet';
 }
   
     
