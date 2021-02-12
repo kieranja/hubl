@@ -6,7 +6,7 @@ describe(`A global widget is one which can be shared across templates`, () => {
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{% global_widget "facebook_fan_box" overrideable=False, label='Facebook Fan Box' %}`);
+      const html = renderString(`{% global_widget "facebook_fan_box", overrideable=False, label='Facebook Fan Box' %}`);
       
   });
 });

@@ -2,9 +2,8 @@ function register(env) {
   env.addFilter("root", handler);
 }
 
-function handler(input, root) {
-
-
+function handler(input) {
+  return Math.sqrt(input);
 }
   
 

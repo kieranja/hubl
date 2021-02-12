@@ -6,7 +6,7 @@ describe(`Renders the blog comments embed tag`, () => {
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{% blog_comments "default_blog_comments" select_blog="359485112" %}`);
+      const html = renderString(`{% blog_comments "default_blog_comments", select_blog="359485112" %}`);
       
   });
 });

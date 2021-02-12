@@ -19,7 +19,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
   let obj = await getJSON(docPath);
   const { filters, functions, tags } = obj;
 
-  await buildTests(tags, 'tags');
+  await buildTests(tags, 'filters');
 
 })().catch( res => {
   console.log('Error occured', res);
@@ -36,11 +36,15 @@ async function buildTests(funcs, type) {
       continue;
     }
 
-    if (snippets.length > 1) {
-      console.log(funcs[fnName])
-    } else {
+    const exists = await fsPromises.access(path.join(__dirname, 'tests', type,  fnName + '.test.js'), fsPromises.F_OK);
+
+    if (exists) {
+      console.log('exists');
       continue;
     }
+
+    console.log('doesnt exist');
+    continue;
 
     const totalParams = params.length;
     const optionalParams = params.find(item => item.required === false);

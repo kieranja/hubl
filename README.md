@@ -21,3 +21,4 @@ I want to be able to test my modules using Jest.
 3. integrate all functions
 4. integrate all tags
 5. allow hooks for any methods which use data from hubspot - allowing data to be populated from the API (build a static version of the site), nots sure this is possible yet though.
+6. support space seperated params for filters - currently you need to use commas.

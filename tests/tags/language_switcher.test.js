@@ -6,7 +6,7 @@ describe(`Language switcher`, () => {
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{% language_switcher  "language_switcher" display_mode="hybrid" %}
+      const html = renderString(`{% language_switcher  "language_switcher", display_mode="hybrid" %}
 `);
       
   });

@@ -20,7 +20,13 @@ describe(`Macros allow you to print multiple statements with a dynamic value or 
       
   });
   it(`The macro can then be called like a function. The macro is printed for anchor tags in CSS.`, () => {
-      const html = renderString(`a { {{ trans("all .2s ease-in-out") }} }`);
+      const html = renderString(`
+      {% macro trans(value) %}
+   {{ value }} test
+{% endmacro %}
       
+      { {{ trans("hey") }} }`);
+      
+      expect(html).toContain("hey test")
   });
 });

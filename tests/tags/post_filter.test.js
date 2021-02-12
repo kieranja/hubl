@@ -7,7 +7,7 @@ This module can only be used in templates for: Blog Post`, () => {
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{% post_filter "my_post_filter" label="My Post Filter", expand_link_text="see all", filter_type="tag", list_title="Lists by Tag", max_links=5, order_by="post_count", select_blog="default" %}`);
+      const html = renderString(`{% post_filter "my_post_filter", label="My Post Filter", expand_link_text="see all", filter_type="tag", list_title="Lists by Tag", max_links=5, order_by="post_count", select_blog="default" %}`);
       
   });
 });

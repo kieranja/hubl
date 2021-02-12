@@ -6,7 +6,7 @@ describe(`Used to add an empty module for spacing to the left or right of anothe
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{% space "my_spacer" label="Horizontal Spacer" %}`);
+      const html = renderString(`{% space "my_spacer", label="Horizontal Spacer" %}`);
       
   });
 });

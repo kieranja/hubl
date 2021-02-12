@@ -6,7 +6,7 @@ describe(`Simple menu, uses static link structure`, () => {
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{% simple_menu "my_simple_menu" orientation="horizontal", label="Simple Menu" %}`);
+      const html = renderString(`{% simple_menu "my_simple_menu", orientation="horizontal", label="Simple Menu" %}`);
       
   });
 });
