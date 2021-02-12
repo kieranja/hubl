@@ -105,7 +105,7 @@ export class HublEnvironment {
    * To match hubl
    */
   fixQuotes(input) {
-    return input.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+    return input.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
   }
 
   /**

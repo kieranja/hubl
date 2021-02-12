@@ -3,7 +3,7 @@ function register(env) {
 }
 
 function handler(input, to_remove) {
-  return input.replace(to_remove);
+  return input.replace(to_remove, '');
 }
   
 
