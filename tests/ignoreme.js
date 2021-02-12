@@ -1,30 +1,22 @@
 // Example.
 import Nunjucks from 'nunjucks';
 
-import hubl, { renderPage } from '../src/index.js';
-
-// Autoescape disabled - this is fine as we're not using this in prod.
-const env = new Nunjucks.Environment(new Nunjucks.FileSystemLoader('./'));
-
-hubl(env, {
-
-});
+import hubl, { renderModuleString, renderPageString } from '../src/index.js';
 
 
-
-const output = env.renderString(
+const output = renderModuleString(
   'Hello {{ ["HEY", "HEY2","HEY3"]|map("lower") }}', 
   { username: 'James' }
 );
 console.log(output);
 
-const output2 = env.renderString(
+const output2 = renderModuleString(
   'Hello {{ blog_topics() }}', 
   { username: 'James' }
 );
 
 
-const output3 = env.renderString(
+const output3 = renderModuleString(
   `Hello {% text %}
 
   {% text %}
@@ -33,7 +25,7 @@ const output3 = env.renderString(
 );
 
 
-const output4 = env.renderString(
+const output4 = renderModuleString(
   `Hello 
   {% dnd_area "cool", className="hey" %}
     heydsfdsdsfdsfdsfdsffsffdfsfdsfdsdsfd
@@ -42,7 +34,7 @@ const output4 = env.renderString(
   { username: 'James' }
 );
 
-const module2 = env.renderString(
+const module2 = renderModuleString(
   `Hello 
   {% dnd_module path="fixture/module.html", offset=2 %}
 
@@ -52,8 +44,7 @@ const module2 = env.renderString(
 console.log(module2);
 
 
-console.log(renderPage(env,
-  `Hello 
+console.log(renderPageString(`Hello 
  
   
   {{ require_js("index.js", "footer")}}

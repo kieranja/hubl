@@ -4,7 +4,6 @@ function register(env) {
 
 function handler(input, function_attr) {
 
-
 }
   
 

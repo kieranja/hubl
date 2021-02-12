@@ -1,13 +1,19 @@
 {
   "name": "hubl",
-  "version": "0.0.2",
+  "version": "0.0.16",
   "description": "Implementation of HubL using Nunjucks",
-  "main": "dist/index.js",
-  "module": "dist/index-module.js",
-  "browser": "dist/index-browser.js",
+  "main": "./index.js",
+  "module": "./index.esm.js",
+  "browser": "./index-browser.js",
   "type": "module",
+  "files": [
+    "index.js",
+    "index.esm.js"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "rollup -c",
+    "push": "npm publish"
   },
   "repository": {
     "type": "git",
@@ -21,6 +27,8 @@
   },
   "homepage": "https://github.com/kieranja/hubl#readme",
   "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
     "@rollup/plugin-commonjs": "^17.1.0",
     "bent": "^7.3.12",
     "jest": "^26.6.3",

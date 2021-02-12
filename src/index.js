@@ -1,6 +1,7 @@
 import Tags from './tags/index.js';
 import Functions from './functions/index.js';
 import Filters from './filters/index.js';
+import Nunjucks from 'nunjucks';
 
 
 function getPageDefaults() {
@@ -46,19 +47,117 @@ export function renderPage(env, content, page = {}) {
 }
 
 
-function setupStandardVariables(env) {
+export function renderModule(env, content, fields) {
+  return env.renderString(content, fields);
+}
 
+
+
+function setupStandardVariables(env) {
   // Standard globals.
   env.addGlobal("standard_footer_includes", "")
 
 }
 
 
-export default function(env, config) {
+export class HublEnvironment {
+  constructor(env) {
+    this.nunjucksEnv = env;
+
+    this.page = getPageDefaults();
+
+    this.setupExtensions({});
+    // Store things like standard_page_includes.
+    this.globalStorage = {};
+  }
+
+  /**
+   * Parse a HubL snippet in the context of a module.
+   * @param {*} string 
+   * @param {*} variables 
+   */
+  renderModuleString(string, variables = {}) {
+    return this.fixQuotes(this.nunjucksEnv.renderString(string, variables));
+  }
 
 
-  Tags(env, config);
-  Functions(env, config);
-  Filters(env, config);
-  return env;
+  renderModule(string, variables = {}) {
+    return this.fixQuotes(this.nunjucksEnv.render(file, variables));
+  }
+
+
+  /**
+   * Render HubL snippet in context of a page.
+   */
+  renderPageString(string, variables = {}) {
+    variables = { ...getPageDefaults(), ...variables };
+    return this.fixQuotes(this.nunjucksEnv.render(string, variables));
+  }
+
+  /**
+   * Allow Nujucks to be extended.
+   */
+  getNunjucksEnv() {
+    return this.nunjucksEnv;
+  }
+
+  /**
+   * To match hubl
+   */
+  fixQuotes(input) {
+    return input.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+  }
+
+  /**
+   * Register everything.
+   */
+  setupExtensions(config) {
+    Tags(this.nunjucksEnv, config);
+    Functions(this.nunjucksEnv, config);
+    Filters(this.nunjucksEnv, config);
+  }
+}
+
+
+// Copy nunjuck
+var hublenv;
+
+// Setup a single instance.
+function configure() {
+  const env = new Nunjucks.Environment(new Nunjucks.FileSystemLoader('./'));
+  hublenv = new HublEnvironment(env);
+}
+
+export function renderString(content, ctx = {}) {
+  if (!hublenv) {
+    configure();
+  }
+
+  return hublenv.renderModuleString(content, ctx);  
+}
+
+export function renderModuleString(content, ctx = {}) {
+  if (!hublenv) {
+    configure();
+  }
+
+  return hublenv.renderModuleString(content, ctx);  
+}
+
+export function renderPageString(content, ctx = {}) {
+  if (!hublenv) {
+    configure();
+  }
+
+  return hublenv.renderPageString(content, ctx);
+};
+
+
+export const Environment = HublEnvironment;
+
+
+export default function(config) {
+  const env = new Nunjucks.Environment(new Nunjucks.FileSystemLoader('./'));
+  const hublenv = new HublEnvironment(env);
+  return hublenv;
 }

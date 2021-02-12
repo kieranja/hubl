@@ -6,7 +6,8 @@ export default {
  output: [
   {
    file: pkg.main,
-   format: 'cjs'
+   format: 'cjs',
+   exports: 'named'
   },
   {
    file: pkg.module,
@@ -20,6 +21,5 @@ export default {
  ],
  external: [
   ...Object.keys(pkg.dependencies || {})
- ],
- plugins: [commonjs()]
+ ]
 };
