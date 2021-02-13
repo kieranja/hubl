@@ -4,47 +4,19 @@ import Filters from './filters/index.js';
 import Nunjucks from 'nunjucks';
 
 
-function getPageDefaults() {
-  return {
-      account: {},
-      company_domain: '',
-      contact: {},
-      content: {
-        absolute_url: '',
-        archived: false,
-        author_email: '',
-        author_name: '',
-        author_username: '',
-
-        campaign: '',
-        campaign_name: '',
-        created: '',
-        meta_description: '', 
-        name: '',
-        publish_date: '',
-        publish_date_localized: '',
-        template_path: '',
-        updated: '',
-      },
-      content_id: 1,
-      favicon_link:1,
-      hub_id: 1,
-  }
-}
-
 /**
  * Setup page context.
  * @param {*} env 
  */
-export function renderPage(env, content, page = {}) {
-  const pageDefaults = getPageDefaults();
-  page = { ...pageDefaults, globals: { ...pageDefaults.globals, ...page.globals }};
+// export function renderPage(env, content, page = {}) {
+//   const pageDefaults = getPageDefaults();
+//   page = { ...pageDefaults, globals: { ...pageDefaults.globals, ...page.globals }};
 
-  env.addGlobal("standard_footer_includes", '');
-  env.addGlobal("styleheets", []);
+//   env.addGlobal("standard_footer_includes", '');
+//   env.addGlobal("styleheets", []);
 
-  return env.renderString(content, page);
-}
+//   return env.renderString(content, page);
+// }
 
 
 export function renderModule(env, content, fields) {
@@ -52,25 +24,43 @@ export function renderModule(env, content, fields) {
 }
 
 
-
 function setupStandardVariables(env) {
   // Standard globals.
-  env.addGlobal("standard_footer_includes", "")
-
+  env.addGlobal("standard_footer_includes", "");
 }
 
 
 export class HublEnvironment {
-  constructor(env) {
+  constructor(env, pageManager, hubdbManager, ctaManager, menuManager) {
     this.nunjucksEnv = env;
 
-    this.page = getPageDefaults();
 
-    this.setupExtensions({});
+    
     // Store things like standard_page_includes.
     this.globalStorage = {};
+
+    this.hubdbManager = hubdbManager;
+    this.ctaManager = ctaManager;
+    this.menuManager = menuManager;
+    this.pageManager = pageManager;
+    
+    this.setupExtensions({});
   }
 
+  getHubDB() {
+    return this.hubdbManager;
+  }
+
+  getCTAManager() {
+    return this.ctaManager;
+  }
+  getMenuManager() {
+    return this.menuManager;
+  }
+
+  getPageManager() {
+    return this.pageManager;
+  }
   /**
    * Parse a HubL snippet in the context of a module.
    * @param {*} string 
@@ -80,18 +70,15 @@ export class HublEnvironment {
     return this.fixQuotes(this.nunjucksEnv.renderString(string, variables));
   }
 
-
   renderModule(string, variables = {}) {
     return this.fixQuotes(this.nunjucksEnv.render(file, variables));
   }
-
 
   /**
    * Render HubL snippet in context of a page.
    */
   renderPageString(string, variables = {}) {
-    variables = { ...getPageDefaults(), ...variables };
-    return this.fixQuotes(this.nunjucksEnv.render(string, variables));
+    return this.fixQuotes(this.nunjucksEnv.renderString(string, variables));
   }
 
   /**
@@ -112,22 +99,40 @@ export class HublEnvironment {
    * Register everything.
    */
   setupExtensions(config) {
-    Tags(this.nunjucksEnv, config);
-    Functions(this.nunjucksEnv, config);
-    Filters(this.nunjucksEnv, config);
+    Tags(this, config);
+    Functions(this, config);
+    Filters(this, config);
+  }
+
+  addExtension(str, handler) {
+    return this.nunjucksEnv.addExtension(str, handler);
+  }
+  addGlobal(str, handler) {
+    return this.nunjucksEnv.addGlobal(str, handler);
+  }
+  addFilter(str, handler) {
+    return this.nunjucksEnv.addFilter(str, handler);
   }
 }
+
+
+
 
 
 // Copy nunjuck
 var hublenv;
 
 // Setup a single instance.
-function configure() {
+export function configure(pageManager, hubDBManager, ctaManager, menuManager) {
   const env = new Nunjucks.Environment(new Nunjucks.FileSystemLoader('./'));
-  hublenv = new HublEnvironment(env);
+  hublenv = new HublEnvironment(env, pageManager, hubDBManager, ctaManager, menuManager);
 }
 
+/**
+ * Useful for rendering simple strings.
+ * @param {*} content 
+ * @param {*} ctx 
+ */
 export function renderString(content, ctx = {}) {
   if (!hublenv) {
     configure();
@@ -136,20 +141,36 @@ export function renderString(content, ctx = {}) {
   return hublenv.renderModuleString(content, ctx);  
 }
 
+/**
+ * Render in a module context. This still needs access to manager instances as lots of methods
+ * require data from a datasource such as crm_*, hubdb_* and menu*
+ * @param {*} content 
+ * @param {*} ctx 
+ */
 export function renderModuleString(content, ctx = {}) {
   if (!hublenv) {
     configure();
   }
 
+  // TODO: add module.id etc
   return hublenv.renderModuleString(content, ctx);  
 }
 
-export function renderPageString(content, ctx = {}) {
+/**
+ * Render in a page context. This requires a page to be set, it must've been setup initially.
+ * @param string path
+ * @param {*} content 
+ * @param {*} ctx 
+ */
+export function renderPageString(page, content, ctx = {}) {
   if (!hublenv) {
     configure();
   }
 
-  return hublenv.renderPageString(content, ctx);
+  const pageManager = hublenv.getPageManager();
+  pageManager.setActivePageByPath(page);
+  // Render string, but throw in the page variables.
+  return hublenv.renderPageString(content, {...ctx, ...pageManager.getThemeGlobals()});
 };
 
 

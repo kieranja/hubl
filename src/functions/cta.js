@@ -1,15 +1,9 @@
 function register(env) {
-  env.addGlobal("cta", handler);
+  env.addGlobal("cta", (guid, align_opt) => handler(env, guid, align_opt));
 }
     
-function handler(guid, align_opt) {
-
-  const lazyId = Math.random()
-      .toString(36)
-      .substr(0, 9);
-
-  return `<a id="cta_button_${id}" class="cta_button button" href="#" style="" cta_dest_link="#" title="">CTA example</a>`;
-
+function handler(env, guid, align_opt) {
+  return env.getCTAManager().render(guid, align_opt);
 }
 
 export {

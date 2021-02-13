@@ -1,0 +1,31 @@
+[
+  {
+    "id":123,
+    "label":"Menu 1",
+    "url":"https://google.com",
+    "pageId":1,
+    "contentGroupId":null,
+    "parentNode":{},
+    "children":[
+      {
+        "label":"Menu 1.1",
+        "url":"https://google.com",
+        "pageId":1,
+        "contentGroupId":null,
+        "parentNode":{},
+        "activeBranch":null,
+        "activeNode":null,
+        "level":2,
+        "pageTitle":"Page title 1.1",
+        "slug":"page-title-1-1",
+        "linkTarget":"_self"
+      }
+    ],
+    "activeBranch":null,
+    "activeNode":null,
+    "level":1,
+    "pageTitle":"Page title",
+    "slug":"page-title",
+    "linkTarget":"_self"
+  }
+]

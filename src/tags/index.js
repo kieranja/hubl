@@ -49,7 +49,7 @@ import widget_attribute_init from './widget_attribute.js';
 import widget_block_init from './widget_block.js';
 import widget_container_init from './widget_container.js';
 
-export default function configure(env, config) {
+export default function configure(env, hubdb, config) {
   
   blog_comments_init(env, config);
   blog_social_sharing_init(env, config);

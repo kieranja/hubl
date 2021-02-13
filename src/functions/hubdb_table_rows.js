@@ -1,10 +1,12 @@
 function register(env) {
-  env.addGlobal("hubdb_table_rows", handler);
+  console.log(env.getHubDB());
+  env.addGlobal("hubdb_table_rows", (table_id, query) => handler(env, table_id, query));
 }
     
-function handler(table_id, query) {
+function handler(env, table_id, query) {
+  const res = env.getHubDB().find(table_id, query);
 
-
+  return res;
 }
   
     
