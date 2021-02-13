@@ -6,7 +6,7 @@ describe(`Returns URL to specified asset by given path`, () => {
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{{ get_asset_url("../assets/banner.jpeg") )}}`);
+      const html = renderString(`{{ get_asset_url("../assets/banner.jpeg") }}`);
       
   });
 });

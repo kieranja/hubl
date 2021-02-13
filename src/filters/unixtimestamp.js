@@ -3,8 +3,7 @@ function register(env) {
 }
 
 function handler(input) {
-
-
+  return Math.floor(new Date().getTime()/1000);
 }
   
 

@@ -6,12 +6,7 @@ function register(env) {
 
 
 function handler(env, url, render_options) {
-  const existing = env.getGlobal("standard_footer_includes");
-  env.addGlobal(
-    "standard_footer_includes", 
-    new Nunjucks.runtime.SafeString(existing + `\n<script src="${ url }"></script>`)
-  );
-
+  return env.addScript(url, render_options);
 }
   
 export {

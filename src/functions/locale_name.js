@@ -3,7 +3,9 @@ function register(env) {
 }
     
 function handler(language_code, target_language_code) {
-  return 'English';
+  console.log(Intl.DisplayNames)
+  const languageNames = new Intl.DisplayNames([target_language_code], {type: 'language'});
+  return languageNames.of(language_code);;
 }
   
     

@@ -1,0 +1,36 @@
+{
+  "1": {
+    "metadata": {
+      "id": 1,
+      "name": "tablename",
+      "columns": [
+        "title"
+      ],
+      "created_at": "",
+      "published_at": "",
+      "updated_at": "",
+      "row_count": 2
+    },
+    "rows": [
+      {
+        "hs_id": 123,
+        "hs_path": null,
+        "hs_child_table": "",
+        "hs_name": "title",
+        "hs_created_at": "",
+        "title": "TITLE 1",
+        "count": 101
+      },
+      {
+        "hs_id": 124,
+        "hs_path": null,
+        "hs_child_table": "",
+        "hs_name": "title",
+        "hs_created_at": "",
+        "column_name": "",
+        "title": "TITLE 2",
+        "count": 50
+      }
+    ]
+  }
+}

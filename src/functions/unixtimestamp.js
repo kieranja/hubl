@@ -3,7 +3,7 @@ function register(env) {
 }
     
 function handler(var_attr) {
-  return new Date().getTime() / 1000;
+  return Math.floor(new Date().getTime() / 1000);
 }
   
     

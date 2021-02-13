@@ -1,22 +1,6 @@
-import Tags from './tags/index.js';
-import Functions from './functions/index.js';
-import Filters from './filters/index.js';
+;
 import Nunjucks from 'nunjucks';
-
-
-/**
- * Setup page context.
- * @param {*} env 
- */
-// export function renderPage(env, content, page = {}) {
-//   const pageDefaults = getPageDefaults();
-//   page = { ...pageDefaults, globals: { ...pageDefaults.globals, ...page.globals }};
-
-//   env.addGlobal("standard_footer_includes", '');
-//   env.addGlobal("styleheets", []);
-
-//   return env.renderString(content, page);
-// }
+import HublEnvironment from './lib/hub_environment.js';
 
 
 export function renderModule(env, content, fields) {
@@ -27,95 +11,8 @@ export function renderModule(env, content, fields) {
 function setupStandardVariables(env) {
   // Standard globals.
   env.addGlobal("standard_footer_includes", "");
+  env.addGlobal("standard_header_includes", "");
 }
-
-
-export class HublEnvironment {
-  constructor(env, pageManager, hubdbManager, ctaManager, menuManager) {
-    this.nunjucksEnv = env;
-
-
-    
-    // Store things like standard_page_includes.
-    this.globalStorage = {};
-
-    this.hubdbManager = hubdbManager;
-    this.ctaManager = ctaManager;
-    this.menuManager = menuManager;
-    this.pageManager = pageManager;
-    
-    this.setupExtensions({});
-  }
-
-  getHubDB() {
-    return this.hubdbManager;
-  }
-
-  getCTAManager() {
-    return this.ctaManager;
-  }
-  getMenuManager() {
-    return this.menuManager;
-  }
-
-  getPageManager() {
-    return this.pageManager;
-  }
-  /**
-   * Parse a HubL snippet in the context of a module.
-   * @param {*} string 
-   * @param {*} variables 
-   */
-  renderModuleString(string, variables = {}) {
-    return this.fixQuotes(this.nunjucksEnv.renderString(string, variables));
-  }
-
-  renderModule(string, variables = {}) {
-    return this.fixQuotes(this.nunjucksEnv.render(file, variables));
-  }
-
-  /**
-   * Render HubL snippet in context of a page.
-   */
-  renderPageString(string, variables = {}) {
-    return this.fixQuotes(this.nunjucksEnv.renderString(string, variables));
-  }
-
-  /**
-   * Allow Nujucks to be extended.
-   */
-  getNunjucksEnv() {
-    return this.nunjucksEnv;
-  }
-
-  /**
-   * To match hubl
-   */
-  fixQuotes(input) {
-    return input.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
-  }
-
-  /**
-   * Register everything.
-   */
-  setupExtensions(config) {
-    Tags(this, config);
-    Functions(this, config);
-    Filters(this, config);
-  }
-
-  addExtension(str, handler) {
-    return this.nunjucksEnv.addExtension(str, handler);
-  }
-  addGlobal(str, handler) {
-    return this.nunjucksEnv.addGlobal(str, handler);
-  }
-  addFilter(str, handler) {
-    return this.nunjucksEnv.addFilter(str, handler);
-  }
-}
-
-
 
 
 
