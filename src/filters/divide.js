@@ -3,7 +3,7 @@ function register(env) {
 }
 
 function handler(input, divisor) {
-  return parseFloat(input / divisor);
+  return parseFloat(input) / parseFloat(divisor);
 }
   
 

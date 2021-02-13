@@ -1,9 +1,11 @@
+import { parseISO,getUnixTime } from 'date-fns';
+
 function register(env) {
   env.addFilter("unixtimestamp", handler);
 }
 
 function handler(input) {
-  return Math.floor(new Date().getTime()/1000);
+  return getUnixTime(parseISO(input));
 }
   
 

@@ -1,9 +1,9 @@
 
 import { renderString } from '../../src/index';
 describe(`Round the number to a given precision.`, () => {
-  it(`Note that even if rounded to 0 precision, a float is returned.`, () => {
+  it(`Basic case.`, () => {
       const html = renderString(`{{ 42.55|round }}`);
-      expect(html).toBe(`43.0`);
+      expect(html).toBe(`43`);
   });
   it(`unnamed case 1`, () => {
       const html = renderString(`{{ 42.55|round(1, 'floor') }}`);

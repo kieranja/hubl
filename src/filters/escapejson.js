@@ -3,7 +3,7 @@ function register(env) {
 }
 
 function handler(input) {
-  return JSON.parse(input);
+  return JSON.stringify(input);
 }
   
 

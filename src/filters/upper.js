@@ -1,10 +1,9 @@
 function register(env) {
-  env.addFilter("fromyaml", handler);
+  env.addFilter("upper", handler);
 }
 
 function handler(input) {
-
-
+  return input.toUpperCase();
 }
   
 

@@ -1,10 +1,9 @@
 function register(env) {
-  env.addFilter("e", handler);
+  env.addFilter("float", handler);
 }
 
 function handler(input) {
-
-
+  return parseFloat(input);
 }
   
 

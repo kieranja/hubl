@@ -1,10 +1,9 @@
 function register(env) {
-  env.addFilter("d", handler);
+  env.addFilter("lower", handler);
 }
 
 function handler(input) {
-
-
+  return input.toLowerCase();
 }
   
 

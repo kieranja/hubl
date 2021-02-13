@@ -1,9 +1,10 @@
+import Nunjucks from 'nunjucks';
 function register(env) {
   env.addFilter("tojson", handler);
 }
 
 function handler(input) {
-  return JSON.parse(input);
+  return new Nunjucks.runtime.SafeString(JSON.stringify(input));
 }
   
 

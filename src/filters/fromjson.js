@@ -3,8 +3,8 @@ function register(env) {
 }
 
 function handler(input) {
-
-
+  console.log(input)
+  return JSON.parse(input);
 }
   
 
