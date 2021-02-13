@@ -30,7 +30,6 @@ import hubdb_table_column_init from './hubdb_table_column.js';
 import hubdb_table_row_init from './hubdb_table_row.js';
 import hubdb_table_rows_init from './hubdb_table_rows.js';
 import hubdb_table_init from './hubdb_table.js';
-import include_css_init from './include_css.js';
 import locale_name_init from './locale_name.js';
 import menu_init from './menu.js';
 import module_asset_url_init from './module_asset_url.js';
@@ -82,7 +81,6 @@ export default function configure(env, config) {
   hubdb_table_row_init(env, config);
   hubdb_table_rows_init(env, config);
   hubdb_table_init(env, config);
-  include_css_init(env, config);
   locale_name_init(env, config);
   menu_init(env, config);
   module_asset_url_init(env, config);
