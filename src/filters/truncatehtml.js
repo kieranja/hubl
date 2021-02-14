@@ -61,13 +61,10 @@ function trunc(str, n, end, breakword) {
     if (!tagNameComplete && c !== "<" && c !== ">") tagName += c;
   }
 
-  //console.log(openTags, inTag, tagName, tagNameComplete, tagClosing, lastSpace);
   var small = str.substring(0, lastSpace) + end;
-  console.log(str);
   if (breakword) {
     small = str.substr(0, n) + end;
   }
-  console.log(openTags);
 
   for (var i = openTags.length - 1; i >= 0; i--)
     if (openTags[i].p <= lastSpace) small += "</" + openTags[i].tag + ">";

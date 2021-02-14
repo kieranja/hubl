@@ -62,15 +62,29 @@ export default class HublEnvironment {
   renderModuleString(string, variables = {}) {
     return this.fixQuotes(this.nunjucksEnv.renderString(string, { 
       ...this.globalVariables, 
-      ...variables 
+      module: variables,
+      module_id: new Date().getTime() 
     }));
   }
 
-  renderModule(string, variables = {}) {
+  renderModule(file, variables = {}) {
     return this.fixQuotes(this.nunjucksEnv.render(file, {
       ...this.globalVariables,
-      ...variables
+      module: variables,
+      module_id: new Date().getTime() 
     }));
+  }
+
+  /**
+   * Can be used for strings.
+   * @param {*} string 
+   * @param {*} variables 
+   */
+  renderString(string, variables = {}) {
+    return this.fixQuotes(this.nunjucksEnv.renderString(string, {
+      ...this.globalVariables,
+      ...variables
+    })); 
   }
 
   /**

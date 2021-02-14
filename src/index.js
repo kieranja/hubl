@@ -1,4 +1,3 @@
-;
 import Nunjucks from 'nunjucks';
 import HublEnvironment from './lib/hub_environment.js';
 
@@ -35,7 +34,7 @@ export function renderString(content, ctx = {}) {
     configure();
   }
 
-  return hublenv.renderModuleString(content, ctx);  
+  return hublenv.renderString(content, ctx);  
 }
 
 /**
@@ -50,8 +49,10 @@ export function renderModuleString(content, ctx = {}) {
   }
 
   // TODO: add module.id etc
+  
   return hublenv.renderModuleString(content, ctx);  
 }
+
 
 /**
  * Render in a page context. This requires a page to be set, it must've been setup initially.

@@ -5,7 +5,6 @@ function register(env) {
 }
 
 function handler(input, diff, unit) {
-  console.log(input)
   return add(input, {[unit]: diff} );
 }
   

@@ -7,7 +7,6 @@ function register(env) {
 
 // TODO: implement unit
 function handler(input, end, unit) {
-  console.log(input);
   const res = intervalToDuration({ start: input, end: end}, unit);
 
   if (!res[unit]) {

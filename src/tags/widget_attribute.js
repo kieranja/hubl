@@ -10,9 +10,9 @@ function handler(env) {
 
       var args = parser.parseSignature(null, true);
       parser.advanceAfterBlockEnd(tok.value);
-      //var body = parser.parseUntilBlocks('end_widget_attribute');
-      let body = null;
-      //parser.advanceAfterBlockEnd();
+      var body = parser.parseUntilBlocks('end_widget_attribute');
+      // let body = null;
+      parser.advanceAfterBlockEnd();
       return new nodes.CallExtension(this, 'run', args, [body]);
 
   };

@@ -1,7 +1,8 @@
+
+import Nunjucks from 'nunjucks';
 function register(env) {
   env.addExtension("gallery", new handler(env));
 }
-import Nunjucks from 'nunjucks';
 function handler(env) {
   this.tags = ['gallery'];
 

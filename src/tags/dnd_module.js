@@ -18,9 +18,10 @@ function handler(env) {
 
   this.run = function(context, args) {
 
-    const { path, width = 12, offset=0 } = args;
+    const { path, width = 12, offset = 0 } = args;
 
-    const content = env.render(path);
+    const content = env.renderModule(path + '.module/module.html', args);
+
     return new Nunjucks.runtime.SafeString(`
     <div class="span${width} widget-span widget-type-custom_widget" style="" data-widget-type="custom_widget" data-x="${ offset }" data-w="${ width }">
       <div id="hs_cos_wrapper_main-module-1" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module" >
