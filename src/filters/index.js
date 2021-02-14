@@ -30,7 +30,6 @@ import multiply_init from './multiply.js';
 import plus_time_init from './plus_time.js';
 import pprint_init from './pprint.js';
 import regex_replace_init from './regex_replace.js';
-import reject_init from './reject.js';
 import render_init from './render.js';
 import root_init from './root.js';
 import select_init from './select.js';
@@ -48,9 +47,10 @@ import wordwrap_init from './wordwrap.js';
 import xmlattr_init from './xmlattr.js';
 import float_init from './float.js';
 import upper_init from './upper.js';
-import lower_init from './lower.js';
 import random_init from './random.js';
 import groupby_init from './groupby.js';
+import rejectattr_init from './rejectattr.js';
+import list_init from './list.js';
 
 export default function configure(env, config) {
   
@@ -86,7 +86,6 @@ export default function configure(env, config) {
   plus_time_init(env, config);
   pprint_init(env, config);
   regex_replace_init(env, config);
-  reject_init(env, config);
   render_init(env, config);
   root_init(env, config);
   select_init(env, config);
@@ -104,7 +103,7 @@ export default function configure(env, config) {
   xmlattr_init(env, config);
   float_init(env, config);
   upper_init(env, config);
-  lower_init(env, config);
   random_init(env, config);
   groupby_init(env, config);
+  list_init(env, config);
 };

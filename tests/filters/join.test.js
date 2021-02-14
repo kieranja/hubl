@@ -12,7 +12,7 @@ describe(`Return a string which is the concatenation of the strings in the seque
 
   // TODO: need to fix.
   it(`It is also possible to join certain attributes of an object`, () => {
-      const html = renderString(`{% set users = [{"name": "kieran", "username": "bob"}] %} {{ users|join(', ', attribute='username') }}`);
+      const html = renderString(`{% set users = [{"name": "kieran", "username": "bob"}] %}{{ users|join(', ', 'username') }}`);
      expect(html).toBe('bob'); 
   });
 });

@@ -5,9 +5,17 @@ function register(env) {
 }
 
 function handler(input, datetimeFormat) {
-  console.log('iso', parseISO(input).getTime());
-  return format(parseISO(input), datetimeFormat.replace('Z', 'z'));
 
+  // // need to sort this out to handle java modifiers, we dont really need to do this.
+  // const check = strftime(input, datetimeFormat);
+
+  // if (!check) {
+  //   return Error('Invalid datetimeFormat');
+  // }
+
+  //                                            ????
+  // i think this should handle most formats. \__o__/
+  return parseISO(input);
 }
   
 

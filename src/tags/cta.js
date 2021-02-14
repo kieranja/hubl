@@ -18,7 +18,6 @@ function handler(env) {
   };
 
   this.run = function(environment) {
-    console.log(environment);
       let str = JSON.stringify(environment.ctx);
       return new Nunjucks.runtime.SafeString(str);
   }

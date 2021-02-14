@@ -4,7 +4,6 @@ function register(env) {
 
 function handler(input, attr) {
 
-  console.log(typeof input[0])
   // array of objects?
   if (typeof input[0] === 'object') {
     var filtered = {};

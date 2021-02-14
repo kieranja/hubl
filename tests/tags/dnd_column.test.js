@@ -14,7 +14,7 @@ describe(`A column inside a drag-and-drop area. Columns can only be children of 
   margin={
     'top': 20,
     'bottom': 200
-  },
+  }
 %}
 
 {% end_dnd_column %}`);

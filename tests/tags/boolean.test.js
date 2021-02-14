@@ -6,7 +6,7 @@ describe(`A boolean option`, () => {
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{% boolean "nav_toggle" label="Hide navigation", value=False, no_wrapper=True %}`);
+      const html = renderString(`{% boolean "nav_toggle", label="Hide navigation", value=False, no_wrapper=True %}`);
       
   });
 });

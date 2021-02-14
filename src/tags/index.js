@@ -20,7 +20,6 @@ import gallery_init from './gallery.js';
 import header_init from './header.js';
 import image_src_init from './image_src.js';
 import image_init from './image.js';
-import include_dnd_partial_init from './include_dnd_partial.js';
 import language_switcher_init from './language_switcher.js';
 import linked_image_init from './linked_image.js';
 import logo_init from './logo.js';
@@ -71,7 +70,6 @@ export default function configure(env, hubdb, config) {
   header_init(env, config);
   image_src_init(env, config);
   image_init(env, config);
-  include_dnd_partial_init(env, config);
   language_switcher_init(env, config);
   linked_image_init(env, config);
   logo_init(env, config);

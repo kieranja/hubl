@@ -1,7 +1,7 @@
 function register(env) {
   env.addExtension("widget_container", new handler(env));
 }
-import Nunjucks from 'nunjucks';
+import * as Nunjucks from 'nunjucks';
 function handler(env) {
   this.tags = ['widget_container'];
 
@@ -10,15 +10,13 @@ function handler(env) {
 
       var args = parser.parseSignature(null, true);
       parser.advanceAfterBlockEnd(tok.value);
-      //var body = parser.parseUntilBlocks('end_widget_container');
-      let body = null;
-      //parser.advanceAfterBlockEnd();
+      var body = parser.parseUntilBlocks('end_widget_container');
+      parser.advanceAfterBlockEnd();
       return new nodes.CallExtension(this, 'run', args, [body]);
 
   };
 
   this.run = function(environment) {
-    console.log(environment);
       let str = JSON.stringify(environment.ctx);
       return new Nunjucks.runtime.SafeString(str);
   }

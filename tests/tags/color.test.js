@@ -6,7 +6,7 @@ describe(`A color picker module`, () => {
       
   });
   it(`unnamed case 1`, () => {
-      const html = renderString(`{% color "my_color_picker" label="Choose a color", color="#000000", no_wrapper=True %}`);
+      const html = renderString(`{% color "my_color_picker", label="Choose a color", color="#000000", no_wrapper=True %}`);
       
   });
 });

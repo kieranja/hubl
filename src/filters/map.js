@@ -3,7 +3,7 @@ function register(env) {
 }
 
 function handler(input, attribute, add, env) {
-  const fn = env.getFilter(attribute);
+  const fn = env.getNunjucksEnv().getFilter(attribute);
   return input.map(fn);
 }
 
