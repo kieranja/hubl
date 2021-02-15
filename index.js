@@ -2510,18 +2510,23 @@ ${ module_css }
   }
 }
 
-function renderModule(env, content, fields) {
-  return env.renderString(content, fields);
-}
-
-
-
 // Copy nunjuck
 var hublenv;
 
 // Setup a single instance.
-function configure$3(pageManager, hubDBManager, ctaManager, menuManager) {
-  const env = new Nunjucks__default['default'].Environment(new Nunjucks__default['default'].FileSystemLoader('./'));
+function configure$3(config) {
+  let { pageManager, hubDBManager, ctaManager, menuManager, templatePath } = config || {};
+  const isNode = typeof process === 'object' && process + '' === '[object process]';
+
+  let fs;
+  // In nodeJS.
+  if (isNode) { 
+    fs = new Nunjucks__default['default'].FileSystemLoader(templatePath ? templatePath : './');
+  } else {
+    fs = Nunjucks__default['default'].WebLoader(templatePath ? templatePath : './'); 
+  }
+  
+  const env = new Nunjucks__default['default'].Environment(fs);
   hublenv = new HublEnvironment(env, pageManager, hubDBManager, ctaManager, menuManager);
 }
 
@@ -2584,7 +2589,6 @@ function index(config) {
 exports.Environment = Environment;
 exports.configure = configure$3;
 exports.default = index;
-exports.renderModule = renderModule;
 exports.renderModuleString = renderModuleString;
 exports.renderPageString = renderPageString;
 exports.renderString = renderString;
