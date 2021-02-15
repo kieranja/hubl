@@ -2,25 +2,25 @@ import Nunjucks from 'nunjucks';
 import HublEnvironment from './lib/hub_environment.js';
 
 
-export function renderModule(env, content, fields) {
-  return env.renderString(content, fields);
-}
-
-
-function setupStandardVariables(env) {
-  // Standard globals.
-  env.addGlobal("standard_footer_includes", "");
-  env.addGlobal("standard_header_includes", "");
-}
-
 
 
 // Copy nunjuck
 var hublenv;
 
 // Setup a single instance.
-export function configure(pageManager, hubDBManager, ctaManager, menuManager) {
-  const env = new Nunjucks.Environment(new Nunjucks.FileSystemLoader('./'));
+export function configure(config) {
+  let { pageManager, hubDBManager, ctaManager, menuManager, templatePath } = config || {};
+  const isNode = typeof process === 'object' && process + '' === '[object process]';
+
+  let fs;
+  // In nodeJS.
+  if (isNode) { 
+    fs = new Nunjucks.FileSystemLoader(templatePath ? templatePath : './');
+  } else {
+    fs = Nunjucks.WebLoader(templatePath ? templatePath : './'); 
+  }
+  
+  const env = new Nunjucks.Environment(fs);
   hublenv = new HublEnvironment(env, pageManager, hubDBManager, ctaManager, menuManager);
 }
 

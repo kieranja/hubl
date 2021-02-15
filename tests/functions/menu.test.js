@@ -6,7 +6,7 @@ import json from '../fixture/menu.json';
 // TODO: need to support top_parent, parent and breadcrumb params (and root_key)
 describe(`Returns the the nested link structure of an advanced menu.`, () => {
     beforeEach(() => {
-        configure(null, null, null,  new MenuManager(json));
+        configure({ menuManager: new MenuManager(json) });
     })
 
     it(`unnamed case 0`, () => {

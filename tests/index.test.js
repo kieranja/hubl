@@ -6,7 +6,7 @@ import PageManager from "../src/lib/page_manager";
 import pagesJSON from './fixture/pages.json';
 
 const d= new Date();
-const hubdb = new HubDbManager({
+const hubDBManager = new HubDbManager({
   1: {
     metadata: {
       id: 1,
@@ -50,7 +50,7 @@ const pageManager = new PageManager(pagesJSON);
 
 describe('Hub DB integration works', () => {
   it('hubdb integration', () => {
-    configure(pageManager, hubdb, ctaManager);
+    configure({pageManager, hubDBManager, ctaManager});
     const html = renderString(`
 {% for row in hubdb_table_rows(1, "count__gt=1") %}
   the value for row {{ row.hs_id }} is {{ row.title }}
@@ -62,7 +62,7 @@ describe('Hub DB integration works', () => {
   });
 
   it('cta renders ', () => {
-    configure(pageManager, hubdb, ctaManager);
+    configure({pageManager, hubDBManager, ctaManager});
     const html = renderString(`{{ cta('ccd39b7c-ae18-4c4e-98ee-547069bfbc5b') }}`);
 
     expect(html).toContain('ccd39b7c-ae18-4c4e-98ee-547069bfbc5b');
@@ -71,14 +71,14 @@ describe('Hub DB integration works', () => {
 
 
   it('Page is correctly configured', () => {
-    configure(pageManager, hubdb, ctaManager);
+    configure({pageManager, hubDBManager, ctaManager});
     const html = renderPageString('/', `{{ content.id }}`);
 
     expect(html).toContain('1');
   });
 
   it('Page is correctly for subpages', () => {
-    configure(pageManager, hubdb, ctaManager);
+    configure({pageManager, hubDBManager, ctaManager});
     const html = renderPageString('/test', `{{ content.id }}`);
 
     expect(html).toContain('2');

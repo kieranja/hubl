@@ -6,8 +6,8 @@ import json from '../fixture/hubdb.json';
 describe(`Returns a list of HubDB rows based on the query`, () => {
 
   beforeEach(() => {
-    const hubdbManager = new HubDbManager(json)
-    configure(null, hubdbManager);
+    const hubDBManager = new HubDbManager(json)
+    configure({hubDBManager});
   })
 
   it(`unnamed case 0`, () => {
