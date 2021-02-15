@@ -1,5 +1,9 @@
 import Nunjucks from 'nunjucks';
+import CtaManager from './lib/cta_manager.js';
+import HubDbManager from './lib/hubdb_manager.js';
 import HublEnvironment from './lib/hub_environment.js';
+import MenuManager from './lib/menu_manager.js';
+import PageManager from './lib/page_manager.js';
 
 
 
@@ -74,9 +78,10 @@ export function renderPageString(page, content, ctx = {}) {
 
 export const Environment = HublEnvironment;
 
-
-export default function(config) {
-  const env = new Nunjucks.Environment(new Nunjucks.FileSystemLoader('./'));
-  const hublenv = new HublEnvironment(env);
-  return hublenv;
+export {
+  HubDbManager,
+  MenuManager,
+  CtaManager,
+  PageManager
 }
+
