@@ -1,6 +1,6 @@
 {
   "name": "hubl",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Implementation of HubL using Nunjucks",
   "main": "./index.js",
   "module": "./index.esm.js",

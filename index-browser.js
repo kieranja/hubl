@@ -7,6 +7,130 @@ var hubl = (function (exports, Nunjucks, dateFns, strftime, clip, lib) {
   var strftime__default = /*#__PURE__*/_interopDefaultLegacy(strftime);
   var clip__default = /*#__PURE__*/_interopDefaultLegacy(clip);
 
+  class CtaManager {
+    constructor(ctas) {
+      this.ctas = ctas;
+      this.ctasById = [];
+      this.init();
+    }
+
+    init() {
+      for (const cta of this.ctas) {
+        this.ctasById[cta.id] = cta;
+      }
+    }
+
+    getAll() {
+      return this.ctas;
+    }
+
+    getById(id) {
+      return this.ctasById(id);
+    }
+
+    render(id) {
+
+      const { portal_id, button_text, ...rest}  = this.ctasById[id];
+
+      return `<!--HubSpot Call-to-Action Code -->
+      <span class="hs-cta-wrapper" id="hs-cta-wrapper-${ id }">
+        <span class="hs-cta-node hs-cta-${ id }" id="hs-cta-${ id }">
+          <!--[if lte IE 8]><div id="hs-cta-ie-element"></div><![endif]-->
+          
+          <a href="https://cta-redirect.hubspot.com/cta/redirect/${ portal_id }/${ id }" >
+            <img class="hs-cta-img" id="hs-cta-img-${ id }" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/${ portal_id }/${ id }.png"  alt="${ button_text }"/>
+          </a>
+        </span>
+        <script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script>
+        <script type="text/javascript">
+          hbspt.cta.load(${ portal_id }, '${ id }', {}); 
+        </script>
+      </span>
+      <!-- end HubSpot Call-to-Action Code -->`;
+    }
+  }
+
+  const OPERATORS = {
+    'eq': (a, b) => a == b,
+    'ne': (a,b) => a != b,
+    'contains': (a, b) => a.includes(b),
+    'lt': (a, b) => a < b,
+    'lte': (a,b) => a <= b,
+    'gt': (a,b) => a > b,
+    'gte': (a,b) => a >= b,
+    'is_null': (a) => a === null,
+    'not_null': (a) => a !== null,
+  };
+
+  const SORT_LIMIT = {
+    'orderBy': (data, val) => {
+      return [...data].sort();
+    },
+    'limit': (data, val) => {
+      return [...data].slice(op)
+    }
+  };
+
+
+  class HubDbManager {
+    constructor(data) {
+      this.data = data;
+    }
+
+    init() {
+      // for (const cta of this.ctas) {
+        // this.data[cta.id] = cta;
+      // }
+    }
+    getAll() {
+      return this.data;
+    }
+
+    getById(id) {
+      return this.ctasById(id);
+    }
+
+    /**
+     * Query table.
+     * @param {*} tableId 
+     * @param {*} query 
+     */
+    find(tableId, query) {
+        const parts = this.parseQuery(query);
+
+        let data = { ...this.data[tableId] };
+
+        for (const [key, value] of Object.entries(parts)) {
+        
+          // Limit or sort
+          if (SORT_LIMIT[key]) {
+            continue;
+          }
+
+          let items = key.split('__');
+
+          if (items && items[1]) {
+            const field = items[0];
+            data.rows = data.rows.filter( item => OPERATORS[items[1]]( item[field], value) );
+          } else {
+            data.rows = data.rows.filter( item => OPERATORS['eq']( item[key], value) );
+          }
+      }
+      return data.rows;
+    }
+
+    parseQuery(queryString) {
+      var query = {};
+      var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+      for (var i = 0; i < pairs.length; i++) {
+          var pair = pairs[i].split('=');
+          query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+      }
+      return query;
+    }
+    
+  }
+
   function register(env) {
     env.addExtension("blog_comments", new handler(env));
   }
@@ -2503,6 +2627,71 @@ ${ module_css }
     }
   }
 
+  class MenuManager {
+    constructor(menus) {
+      this.menus = menus;
+      this.menusById = [];
+      this.init();
+    }
+
+    init() {
+      for (const menu of this.menus) {
+        this.menusById[menu.id] = menu;
+      }
+    }
+
+    getByName(name) {
+      return this.menus.find(item => item.slug === name);
+    }
+
+    getAll() {
+      return this.menus;
+    }
+
+    getById(id) {
+      return this.menusById[id];
+    }
+
+  }
+
+  class PageManager {
+    constructor(pages) {
+      this.activePage = null;
+      this.pages = pages;
+      this.request = {
+
+      };
+    }
+
+    setActivePageById(id) {
+      this.activePage = this.pages.find(page => page.content_id === id);
+      return this.activePage;
+    }
+    
+    setActivePageByPath(path) {
+      this.activePage = this.pages.find(({ content }) => {
+
+        // Homepage.
+        if (path === '/' && content.absolute_url.substr(-1) === '/') {
+          return true;
+        }
+
+        return path === content.absolute_url;
+      });
+
+      return this.activePage;
+    }
+
+    getThemeGlobals() {
+      return { ...this.activePage, ...this.request };
+    }
+
+    getActivePageId() {
+      return this.activePage.content_id;
+    }
+
+  }
+
   // Copy nunjuck
   var hublenv;
 
@@ -2572,16 +2761,12 @@ ${ module_css }
 
   const Environment = HublEnvironment;
 
-
-  function index(config) {
-    const env = new Nunjucks__default['default'].Environment(new Nunjucks__default['default'].FileSystemLoader('./'));
-    const hublenv = new HublEnvironment(env);
-    return hublenv;
-  }
-
+  exports.CtaManager = CtaManager;
   exports.Environment = Environment;
+  exports.HubDbManager = HubDbManager;
+  exports.MenuManager = MenuManager;
+  exports.PageManager = PageManager;
   exports.configure = configure$3;
-  exports.default = index;
   exports.renderModuleString = renderModuleString;
   exports.renderPageString = renderPageString;
   exports.renderString = renderString;
