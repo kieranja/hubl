@@ -2513,7 +2513,7 @@ function configure$3(config) {
   if (isNode) { 
     fs = new Nunjucks.FileSystemLoader(templatePath ? templatePath : './');
   } else {
-    fs = Nunjucks.WebLoader(templatePath ? templatePath : './'); 
+    fs = new Nunjucks.WebLoader(templatePath ? templatePath : './'); 
   }
   
   const env = new Nunjucks.Environment(fs);

@@ -2516,7 +2516,7 @@ ${ module_css }
     if (isNode) { 
       fs = new Nunjucks__default['default'].FileSystemLoader(templatePath ? templatePath : './');
     } else {
-      fs = Nunjucks__default['default'].WebLoader(templatePath ? templatePath : './'); 
+      fs = new Nunjucks__default['default'].WebLoader(templatePath ? templatePath : './'); 
     }
     
     const env = new Nunjucks__default['default'].Environment(fs);
